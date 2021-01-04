@@ -8,7 +8,7 @@ myEmitter.on('event', () => {
 myEmitter.emit('event');
 
 
-// Passing arguments and this to listeners
+/*********** Passing arguments and this to listeners ***********/
 
 myEmitter.on('param', function(a, b) {
   console.log(a, b, this, this === myEmitter);
@@ -19,5 +19,13 @@ myEmitter.on('param', function(a, b) {
   //   _maxListeners: undefined,
   //   [Symbol(kCapture)]: false
   // } true
+});
+myEmitter.emit('param', 'a', 'b');
+
+
+/*********** Using arrow function ***********/ 
+
+myEmitter.on('param', (a, b) => {
+  console.log(a, b, this, this === myEmitter);            // a b MyEmitter {} false
 });
 myEmitter.emit('param', 'a', 'b');
