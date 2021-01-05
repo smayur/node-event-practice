@@ -1,6 +1,10 @@
 const EventEmitter = require('events');
+const net = require("net");
+
 class MyEmitter extends EventEmitter {}
 const myEmitter = new MyEmitter();
+
+const server = net.createServer().listen(8081, "127.0.0.1");
 
 myEmitter.on('event', () => {
   console.log('an event occurred!');
@@ -41,3 +45,15 @@ myEmitter.on('param', (a, b) => {
   
 });
 myEmitter.emit('param', 'a', 'b');
+
+
+/*********** Server ***********/ 
+
+server.on("listening", () => {
+  console.log("Server listening!");
+});
+
+server.on("connection", (socket) => {
+  console.log("Client connected!");
+  socket.end("Hi Mayur");  
+});
