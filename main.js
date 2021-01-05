@@ -20,12 +20,24 @@ myEmitter.on('param', function(a, b) {
   //   [Symbol(kCapture)]: false
   // } true
 });
-myEmitter.emit('param', 'a', 'b');
 
 
 /*********** Using arrow function ***********/ 
 
 myEmitter.on('param', (a, b) => {
   console.log(a, b, this, this === myEmitter);            // a b MyEmitter {} false
+});
+
+// myEmitter.emit('param', 'a', 'b');
+
+
+/*********** Asynchronous ***********/ 
+
+myEmitter.on('param', (a, b) => {
+  
+  setImmediate(() => {
+    console.log('this happens asynchronously');
+  });
+  
 });
 myEmitter.emit('param', 'a', 'b');
