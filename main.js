@@ -1,6 +1,7 @@
 const EventEmitter = require('events');
 const net = require("net");
 const fs = require("fs");
+const { rejects } = require('assert');
 
 class MyEmitter extends EventEmitter {}
 const myEmitter = new MyEmitter();
@@ -67,3 +68,28 @@ fs.readFile('./input.txt', 'utf-8', (err, data) => {
 });
 
 console.log("Will read file!!...");
+
+
+/*********** Promises ***********/ 
+
+const promise = new Promise((resolve, reject) => {
+  fs.readFile('./input.txt', 'utf-8', (err, data) => {
+    if (err) {
+      reject(err);
+    } else {
+      resolve(data);
+    }
+  });
+});
+
+promise.then(data => {
+  fs.writeFile('./output.txt', data, 'utf-8', err => {
+    if (err) console.log(err);
+    console.log("Output.txt file has been updated");    
+  });
+}).catch(err => {
+  console.log("Found error!!!"+err);    
+});
+
+
+console.log("Will read the file 2nd time!!...");
