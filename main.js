@@ -1,5 +1,6 @@
 const EventEmitter = require('events');
 const net = require("net");
+const fs = require("fs");
 
 class MyEmitter extends EventEmitter {}
 const myEmitter = new MyEmitter();
@@ -32,18 +33,6 @@ myEmitter.on('param', (a, b) => {
   console.log(a, b, this, this === myEmitter);            // a b MyEmitter {} false
 });
 
-// myEmitter.emit('param', 'a', 'b');
-
-
-/*********** Asynchronous ***********/ 
-
-myEmitter.on('param', (a, b) => {
-  
-  setImmediate(() => {
-    console.log('this happens asynchronously');
-  });
-  
-});
 myEmitter.emit('param', 'a', 'b');
 
 
@@ -57,3 +46,14 @@ server.on("connection", (socket) => {
   console.log("Client connected!");
   socket.end("Hi Mayur");  
 });
+
+
+/*********** Blocking, synchronous way ***********/ 
+
+const textIn = fs.readFileSync('./input.txt', 'utf-8');
+console.log(textIn);
+const textOut = `This is what we know about Synch: ${textIn}.\nCreated on ${Date.now()}`;
+fs.writeFileSync('./output.txt', textOut);
+console.log("File written");
+
+/*********** Non Blocking, Asynchronous way ***********/ 
