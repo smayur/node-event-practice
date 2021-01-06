@@ -57,3 +57,13 @@ fs.writeFileSync('./output.txt', textOut);
 console.log("File written");
 
 /*********** Non Blocking, Asynchronous way ***********/ 
+
+fs.readFile('./input.txt', 'utf-8', (err, data) => {
+  if (err) console.log(err);
+  console.log(data);
+  fs.writeFile('./output.txt', data, 'utf-8', err => {
+    console.log("Output.txt fle has been updated");    
+  });
+});
+
+console.log("Will read file!!...");

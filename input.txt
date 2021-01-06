@@ -1,1 +1,1 @@
-This is input file text
+You are reading this from input.txt file.
