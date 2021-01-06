@@ -1,7 +1,7 @@
 const EventEmitter = require('events');
 const net = require("net");
 const fs = require("fs");
-const { rejects } = require('assert');
+const circle = require('./circle.js');
 
 class MyEmitter extends EventEmitter {}
 const myEmitter = new MyEmitter();
@@ -71,6 +71,8 @@ console.log("Will read file!!...");
 
 
 /*********** Promises ***********/ 
+// The Promise object represents the eventual 
+// completion (or failure) of an asynchronous operation and its resulting value.
 
 const promise = new Promise((resolve, reject) => {
   fs.readFile('./input.txt', 'utf-8', (err, data) => {
@@ -93,3 +95,7 @@ promise.then(data => {
 
 
 console.log("Will read the file 2nd time!!...");
+
+
+/*********** Modules ***********/ 
+console.log(`The area of a circle of radius 4 is ${circle.area(4)}`);
